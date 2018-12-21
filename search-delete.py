@@ -11,8 +11,9 @@ def search_delete(f_name, in_words_file):
         list_of_words = [item for sublist in rows for item in sublist]
         #print(list_of_words)
     out_name = f_name.split('.')[0]+'-out.csv'
-    with open(f_name, encoding="utf-8") as f: 
-         lines_all = f.readlines() 
+    with open(f_name, encoding="utf-8-sig") as f: 
+         #lines_all = f.readlines()
+         lines_all = list(csv.reader(f))
          length = len(lines_all)
          #print("**********")
          print(length) 
@@ -21,18 +22,15 @@ def search_delete(f_name, in_words_file):
              tw = csv.writer(t)
              skip =0
              for line in lines_all:
-                 #print(line)
+                 print(line)
                  cnt = 0   
                  for item in list_of_words:
-                     #if line.find(item) >= 0:
-                     if re.search(item, line, re.IGNORECASE):
-                         #print('found '+item)
-                         cnt = cnt + 1
-                         break
-                 if cnt == 0:
-                    tw.writerow(line.split(','))
+                     l = [s for s in line if item.lower() in s.lower()]   
+                 if l:
+                    skip = skip+1
+                    #print(line)
                  else:
-                     skip = skip +1
+                    tw.writerow(line)
     print("Total skipped lines - %d ",skip)
 
 #search_delete('test-pins_2.csv', ['INC','LLC', 'LTD'])
