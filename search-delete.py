@@ -12,18 +12,14 @@ def search_delete(f_name, in_words_file):
         #print(list_of_words)
     out_name = f_name.split('.')[0]+'-out.csv'
     with open(f_name, encoding="utf-8-sig") as f: 
-         #lines_all = f.readlines()
          lines_all = list(csv.reader(f))
          length = len(lines_all)
-         #print("**********")
          print(length) 
 
          with open(out_name, 'w', encoding="utf-8") as t:
              tw = csv.writer(t)
              skip =0
              for line in lines_all:
-                 print(line)
-                 cnt = 0   
                  for item in list_of_words:
                      l = [s for s in line if item.lower() in s.lower()]   
                  if l:
@@ -45,6 +41,6 @@ import sys
 if __name__ == "__main__":
        parser = argparse.ArgumentParser()
        parser.add_argument("full_tax_file", help="Give the exact name of the input file with all the details")
-       parser.add_argument("words_file",help="Only one column of search data in the file")
+       parser.add_argument("words_file",help="Only one column of search data(case insensitive) in the file")
        args = parser.parse_args()
        search_delete(args.full_tax_file, args.words_file)

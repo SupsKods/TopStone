@@ -203,7 +203,7 @@ import sys
 
 if __name__ == "__main__":
        parser = argparse.ArgumentParser()
-       parser.add_argument("filename", help="Give the exact name of the input file (name file without spaces)")
+       parser.add_argument("filename", help="Input file in csv utf-8 format. File needs address, city, state, zip in different columns")
        parser.add_argument("--token",help="optional -give token if changed")
        args = parser.parse_args()
        #print(args.filename)

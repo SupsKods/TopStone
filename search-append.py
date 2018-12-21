@@ -18,17 +18,11 @@ def create_pin_file(full_data_file,pid_file):
             
             found_list = []
             for row in f_r:
-                #print row
-                wrote = 0
                 for item in flat_list:
-                        #print item
                     if item in row:
-                                #print 'Found matching ' + item
-                        #wrote = 1
                         zf_w.writerow(row)
                         found_list.append(item)
-                        #break   
-                #if wrote == 0:
+            
             not_found = [i for i in flat_list if i not in found_list]
             print(not_found)    
             for item in not_found:
@@ -40,6 +34,7 @@ import sys
 if __name__ == "__main__":
        parser = argparse.ArgumentParser()
        parser.add_argument("full_tax_file", help="Give the exact name of the input file with all the details")
-       parser.add_argument("pid_file",help="Only one column of search data in the file")
+       parser.add_argument("pid_file",help="Only one column of search data in the file-matches exact")
        args = parser.parse_args()
        create_pin_file(args.full_tax_file, args.pid_file)
+
