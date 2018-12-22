@@ -9,7 +9,8 @@ def search_delete(f_name, in_words_file):
         i_f = csv.reader(in_f)
         rows = list(i_f)
         list_of_words = [item for sublist in rows for item in sublist]
-        #print(list_of_words)
+        print(list_of_words)
+
     out_name = f_name.split('.')[0]+'-out.csv'
     with open(f_name, encoding="utf-8-sig") as f: 
          lines_all = list(csv.reader(f))
@@ -20,8 +21,13 @@ def search_delete(f_name, in_words_file):
              tw = csv.writer(t)
              skip =0
              for line in lines_all:
+                 #print(line)
+                 l = []
                  for item in list_of_words:
-                     l = [s for s in line if item.lower() in s.lower()]   
+                    # l = [s for s in line if item.lower() in s.lower()]   
+                    for s in line:
+                       if item.lower() in s.lower():
+                          l.append(s)
                  if l:
                     skip = skip+1
                     #print(line)
