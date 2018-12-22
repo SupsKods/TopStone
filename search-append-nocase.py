@@ -18,18 +18,21 @@ def create_pin_file(full_data_file,pid_file):
             
             found_list = []
             for row in f_r:
+                l = []
                 for item in flat_list:
-                #for s in line:
-                    if item.lower() in row.lower():
-                        #l.append(s)
-                    #if item in row:
-                        zf_w.writerow(row)
-                        found_list.append(item)
+                    for s in row:
+                        if item.lower() in s.lower():
+                            l.append(s)
+                    #if item in row:      
+                if l:
+                    zf_w.writerow(row)
+                    #found_list.append(item)
             
-            not_found = [i for i in flat_list if i not in found_list]
+            #not_found = [i for i in flat_list if i not in found_list]
             #print(not_found)    
-            for item in not_found:
-                zf_w.writerow([item])
+            #for item in not_found:
+             #:wq!
+             #zf_w.writerow([item])
         
 import argparse
 import sys
